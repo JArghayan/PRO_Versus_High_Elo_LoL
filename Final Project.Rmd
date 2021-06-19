@@ -7,8 +7,31 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
 ```{r, echo = FALSE}
+library(tidyverse)
+pro <- read_csv("LeagueofLegends.csv")
+high_elo <- read_csv("high_diamond_ranked_10min.csv")
+
+```
+
+```{r}
+pro %>% 
+  select(gamelength, bResult, golddiff) %>% 
+  mutate(golddiff = as.list(str_split(golddiff, ","))) %>%
+  unnest() %>% 
+  mutate(golddiff = as.numeric(noquote(golddiff))) %>% 
+  group_by(gamelength) %>% 
+  summarize(mean = sum(golddiff)/ n()) %>% 
+  ggplot(aes(gamelength,mean,fill = if_else(mean >0, "red", "blue")))+
+  geom_col()+
+  labs(title = "Average Gold Difference Based on Game Length in \nPro League of Legends Games",
+       subtitle = "The longer the game goes, the advantage is towards the red team",
+       x = "Game Length in Minutes",
+       y = "Average Gold Difference",
+       fill = "Team Color")
+
 
 ```
