@@ -31,7 +31,8 @@ pro %>%
        subtitle = "The longer the game goes, the advantage is towards the red team",
        x = "Game Length in Minutes",
        y = "Average Gold Difference",
-       fill = "Team Color")
+       fill = "Team Color")+
+  theme_linedraw()
 
 
 ```

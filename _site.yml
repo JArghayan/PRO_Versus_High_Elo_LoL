@@ -1,0 +1,12 @@
+name: "."
+title: "Average Gold Diffrence Based on Game Duration in Professional League of Legends Games"
+description: |
+  Average Gold Diffrence Based on Game Duration in Professional League of Legends Games
+output_dir: "docs"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+output: distill::distill_article
